@@ -30,7 +30,7 @@ const BestPracticeCard = ({ bestPractice }: Props) => {
   }
 
   return (
-    <div className="flex max-w-5xl p-5 mb-5 bg-gray-200 rounded-lg dark:bg-gray-900" key={bestPractice.id}>
+    <div className="flex max-w-5xl p-5 mb-5 bg-gray-200 rounded-lg dark:bg-gray-900" key={bestPractice.id} data-publish-date={bestPractice.publishDate} data-submission-date={bestPractice.submissionDate}>
       <div className="pr-2">
         <button onClick={() => toggleFavourited(bestPractice.id)}>
           {isFavourited(bestPractice.id) ? <StarIcon /> : <StarOutlineIcon />}

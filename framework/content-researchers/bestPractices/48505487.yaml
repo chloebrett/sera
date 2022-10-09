@@ -1,0 +1,38 @@
+paperName: Cross-Disciplinary Perspectives on Collaborations with Software Engineers
+paperLink: https://doi.org/10.1109/CHASE.2017.3
+cohorts:
+  - software engineers
+subCohorts:
+  - software engineers working with other professionals
+keywords:
+  - artists
+  - content developers
+  - data scientists
+  - design researchers
+  - designers
+  - electrical engineers
+  - mechanical engineers
+  - product planners
+  - program managers
+  - service engineers
+  - collaboration
+  - microsoft
+bestPractices: >-
+  - Some engineers, when encountering problems with design, would
+  produce fixes without consulting designers. These would usually be suboptimal
+  as the engineers had neither design training nor the ‘hundreds and hundreds of
+  hours’ of experience observing actual users. Some engineers felt that
+  designers only made things ‘look pretty’–telling them to “put some UI on it”
+  at the end of development. This commonly resulted in unusable features that
+  required substantial redesign.
+
+  - Many of the designers interviewed felt that great engineers did not rush into coding, rather they took the time to fully understand the problem and worked with designers on optimal trade-offs. This helped to avoid suboptimal designs that were unchangeable (or too costly to change).
+
+  - Great engineers proactively ensured that teammates had information they needed to make decisions.
+
+  - Interviewees overwhelmingly wanted software engineers to recognize that they were not experts on all aspects of the product, staying open-minded to the input of other kinds of expertise.
+
+  - Software engineers found it difficult to work in the field of consumer electronics, as they needed to think through implications of decisions upfront, as well as to comprehend and communicate decisions and implications with experts in other domains. However, asking software engineers to have expertise in multiple separate engineering disciplines may not be realistic.
+publishDate: 2017-05-23T00:00:00.000Z
+submissionDate: 2022-10-03T00:00:00.000Z
+id: "48505487"

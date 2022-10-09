@@ -1,0 +1,22 @@
+paperName: When to Eat Your Own Dog Food
+paperLink: https://doi.org/10.1109/MS.2006.170
+cohorts:
+  - software engineers
+subCohorts:
+  - software engineers at software companies
+keywords:
+  - dogfooding
+targetAudience: software engineers and managers at software development
+  companies who are considering using their own product internally
+bestPractices: >-
+  - Within reason, the decision to dogfood should be made by
+  internal users rather than an edict by management; doing otherwise can be
+  dangerous.
+
+  - Dogfooding should not be the only method of finding bugs, but it's a good supplement to more formal techniques.
+
+  - Dogfooding is only useful if developers treat their own insights and internally identified issues with the same seriousness as those identified by paying customers.
+terminology: dogfooding = the act of a company using its own product internally
+publishDate: 2006-11-13T00:00:00.000Z
+submissionDate: 2022-09-10T00:00:00.000Z
+id: 41c8d94e

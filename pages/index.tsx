@@ -5,6 +5,7 @@ import { Layout } from "../layouts/Layout";
 import Filters from "../components/Filters";
 import Results from "../components/Results";
 import SecondaryFilters from "../components/SecondaryFilters";
+import SortDropDown from "../components/SortDropdown";
 
 const Home: NextPage = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -30,26 +31,26 @@ const Home: NextPage = () => {
   );
 
   useEffect(() => {if (showFilters && filterRef.current) {
-    filterRef.current.scrollIntoView({ behavior: "smooth" })
+      filterRef.current.scrollIntoView({ behavior: "smooth" })
   }}, [showFilters, filterRef]);
 
   useEffect(() => {if (showResults && resultsRef.current) {
-    resultsRef.current.scrollIntoView({ behavior: "smooth" })
+      resultsRef.current.scrollIntoView({ behavior: "smooth" })
   }}, [showResults, resultsRef]);
 
   return (
     <Layout title="Persona | Software Engineering User Research Tool">
       <main className="flex-col flex-1 pb-8">
-       <div className="flex flex-col items-center justify-center pb-36 space-y-14 md:space-y-44 min-h-[calc(100vh-56px)]">
-        <h1 className="text-6xl font-bold">Persona</h1>
+        <div className="flex flex-col items-center justify-center pb-36 space-y-14 md:space-y-44 min-h-[calc(100vh-56px)]">
+          <h1 className="text-6xl font-bold">Persona</h1>
 
-        <p className="max-w-3xl text-xl text-center">
-          Persona is a tool to help <b>software engineering researchers</b>{" "}
-          better understand the diverse cohorts they are studying, and to share
-          best practices for conducting research with various user cohorts.
-        </p>
+          <p className="max-w-3xl text-xl text-center">
+            Persona is a tool to help <b>software engineering researchers</b>{" "}
+            better understand the diverse cohorts they are studying, and to share
+            best practices for conducting research with various user cohorts.
+          </p>
 
-        <button onClick={() => setShowFilters(true)}>Get Started</button>
+          <button onClick={() => setShowFilters(true)}>Get Started</button>
 
         </div>
 
@@ -75,18 +76,20 @@ const Home: NextPage = () => {
             <button className="pb-5" onClick={() => setShowSubFilters((curr) => !curr)}>
               {showSubFilters ? "Hide sub filters" : "Show sub filters"}
             </button>
-            {showSubFilters && <SecondaryFilters 
+            {showSubFilters && <SecondaryFilters
               filteredBestPractices={filteredBestPractices}
               filterSubCohorts={filterSubCohorts}
               setFilterSubCohorts={setFilterSubCohorts}
               filterKeywords={filterKeywords}
               setFilterKeywords={setFilterKeywords}
             />}
-            <div>
-              <Results
-                filteredBestPractices={filteredBestPractices}
-              />
+            <div className="pb-5">
+              <SortDropDown />
             </div>
+
+            <Results
+              filteredBestPractices={filteredBestPractices}
+            />
           </div>
         )}
       </main>

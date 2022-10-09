@@ -1,0 +1,29 @@
+paperName: Guidelines for Usability Testing with Children
+paperLink: https://doi.org/10.1145/264044.264045
+cohorts:
+  - children
+subCohorts:
+  - primary school
+  - high school
+  - pre-school
+keywords:
+  - usability testing
+  - user-centred design
+  - set-up
+targetAudience: Computer professionals assessing the usability of computer
+  products with children
+findings: Changing the order of tasks ensures that the same tasks do not come at
+  the end of the test when children are tired.
+summary: Change the ordering of tasks for different actors
+notes: A usability testing lab is is a quiet room set up with computer equipment
+  as well as a camera to record interactions, and a one-way mirror to an
+  observation room.
+bestPractices: Towards the end of a test, some children may run out of patience
+  and the results of the testing may become biased. To mitigate this issue, the
+  ordering of the tasks can be moved around for different actors to ensure that
+  the results remain as unbiased as possible.
+methodology: Usability testing, Interview, Observational
+tools: Usability testing Lab.
+publishDate: 1997-09-01T00:00:00.000Z
+submissionDate: 2022-09-16T00:00:00.000Z
+id: ce38d6a4

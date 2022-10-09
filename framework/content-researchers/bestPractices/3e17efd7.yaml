@@ -1,0 +1,27 @@
+paperName: Review of Quantitative Empirical Evaluations of Technology for People
+  with Visual Impairments
+paperLink: https://dl.acm.org/doi/10.1145/3313831.3376749
+cohorts:
+  - vision impaired
+subCohorts:
+  - blind and vision impaired
+  - low vision
+keywords:
+  - blind
+  - blindfolded
+  - partially sighted
+targetAudience: Researchers who want to replace PVI with sighted participants
+summary: Advice for replacing PVI participants with sighted participants
+bestPractices: It is beneficial to involve PVI in the design process, especially
+  for validating final design with the same population. Sighted participants may
+  be helpful for formative or pilot studies, with PVI evaluations used later in
+  the design and evaluation process. Sighted participants may also be used as a
+  baseline, or used where they could also be a target user, as this may also
+  help improve statistical significance
+terminology: PVI = people with visual impairments
+notesOfCaution: Do not use sighted participants for testing cognitive tasks
+  since visual impairments have consequences on education, knowledge, and mental
+  representations.
+publishDate: 2020-04-04T00:00:00.000Z
+submissionDate: 2022-10-12T00:00:00.000Z
+id: 3e17efd7
