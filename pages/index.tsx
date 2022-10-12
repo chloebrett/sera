@@ -20,18 +20,19 @@ const Home: NextPage = () => {
   );
   const [filterKeywords, setFilterKeywords] = useState<Set<string>>(new Set());
 
-  
   useEffect (() => {
     const { filteredCohorts } = router.query;
     const cohortFilters = filteredCohorts?.toString().split("&").map((cohort) => decodeURI(decodeURI(cohort)));
     const set = new Set(cohortFilters);
     setFilterCohorts(set);
+
+    if (cohortFilters && cohortFilters.length > 0) {
+      setShowFilters(true);
+      setShowResults(true);
+    }
   }, [router])
 
   console.log(filterCohorts);
-
-
-
 
   // Add or remove filters to URL query params whenever the filters change
   // useEffect(() => {
