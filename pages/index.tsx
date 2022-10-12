@@ -1,13 +1,11 @@
 import type { NextPage } from "next";
+import Router from 'next/router'
 import { useEffect, useMemo, useRef, useState } from "react";
 import content from '../framework/compiledContent';
 import { Layout } from "../layouts/Layout";
 import Filters from "../components/Filters";
 import Results from "../components/Results";
 import SecondaryFilters from "../components/SecondaryFilters";
-
-
-
 
 const Home: NextPage = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -20,6 +18,14 @@ const Home: NextPage = () => {
     new Set()
   );
   const [filterKeywords, setFilterKeywords] = useState<Set<string>>(new Set());
+
+  // Add or remove filters to URL query params whenever the filters change
+  useEffect(() => {
+    const query = Array.from(filterCohorts).map((cohort) => encodeURIComponent(cohort)).join("&");
+    Router.push({
+      query: { filteredCohorts: encodeURI(query) },
+  }, undefined, { scroll: false });
+  }, [filterCohorts])
 
   const filteredBestPractices = useMemo(
     () =>
