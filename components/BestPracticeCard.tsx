@@ -39,7 +39,7 @@ const BestPracticeCard = ({ bestPractice }: Props) => {
       <div className="flex flex-col flex-grow">
         <p className="font-bold">{bestPractice.summary ?? bestPractice.paperName}</p>
         <pre className="pt-2 font-sans whitespace-pre-wrap">{bestPractice.bestPractices}</pre>
-        <a href={`/bestPractice/${bestPractice.id}`} target="_blank" rel="noreferrer">
+        <a href={`/bestPractice/${bestPractice.id}`}>
           <p className="pt-2 font-bold text-right cursor-pointer">View More Details</p>
         </a>
       </div>

@@ -4,7 +4,7 @@ import { CLIENT_ID, REDIRECT_URI } from '../config';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 interface NavBarProps {
-  backButtonVisible: boolean
+  backButtonVisible?: boolean
 }
 
 export const NavBar = ({ backButtonVisible }: NavBarProps) => {
@@ -16,18 +16,12 @@ export const NavBar = ({ backButtonVisible }: NavBarProps) => {
 
     const queryStringified = queryString.stringify(params);
 
-    const backClick = () => {
-      history.back();
-    }
-
-    const backButton = "";
-    {/*
+    const backButton = 
       <div className="min-w-fit">
-        <Link href="" onClick={() => backClick()}>
+        <Link href={new URL(document.referrer)}>
           <a className=""><ArrowBackIosIcon sx={{ cursor: "pointer" }}></ArrowBackIosIcon>Back</a>
         </Link>
       </div>
-    */}
 
     return (
       <div>
