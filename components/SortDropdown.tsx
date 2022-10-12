@@ -22,7 +22,6 @@ export default function SortDropDown() {
 
   const changeSort = (selected: any) => {
     let container = document.querySelector('#results');
-    console.log(selected);
     if (selected.data !== null && container) {
         let elements = Array.from(container.children); 
         let sorted = elements.sort(function(a, b){

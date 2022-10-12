@@ -14,21 +14,28 @@ const Home: NextPage = () => {
   const [filterCohorts, setFilterCohorts] = useState<Set<string>>(new Set());
   const filterRef = useRef<HTMLDivElement>(null)
   const resultsRef = useRef<HTMLDivElement>(null)
-  const [filterSubCohorts, setFilterSubCohorts] = useState<Set<string>>(
-    new Set()
-  );
+  const [filterSubCohorts, setFilterSubCohorts] = useState<Set<string>>(new Set());
   const [filterKeywords, setFilterKeywords] = useState<Set<string>>(new Set());
+  const [filterPractices, setFilterPractices] = useState<Set<string>>(new Set());
 
   const filteredBestPractices = useMemo(
     () =>
       content?.bestPractices?.filter(
-        ({ cohorts, subCohorts, keywords }) =>
-          cohorts.some((cohort) => filterCohorts.has(cohort)) ||
-          subCohorts.some((subCohort) => filterSubCohorts.has(subCohort)) ||
-          keywords.some((keyword) => filterKeywords.has(keyword))
+        (bp) =>
+          bp.cohorts.some((cohort) => filterCohorts.has(cohort)) &&
+          ((filterSubCohorts.size == 0 || bp.subCohorts.some((subCohort) => filterSubCohorts.has(subCohort))) &&
+          (filterKeywords.size == 0 || bp.keywords.some((keyword) => filterKeywords.has(keyword))) &&
+          (filterPractices.size == 0 || Array.from(filterPractices).some((practice) => practice in bp)))
       ),
-    [filterCohorts, filterSubCohorts, filterKeywords]
+    [filterCohorts, filterSubCohorts, filterKeywords, filterPractices]
   );
+  const filteredCohort = content?.bestPractices?.filter(
+        ({cohorts}) =>
+          cohorts.some((cohort) => filterCohorts.has(cohort))
+      );
+
+  console.log(filterSubCohorts);
+  console.log(filteredBestPractices.length);
 
   useEffect(() => {if (showFilters && filterRef.current) {
       filterRef.current.scrollIntoView({ behavior: "smooth" })
@@ -82,6 +89,8 @@ const Home: NextPage = () => {
               setFilterSubCohorts={setFilterSubCohorts}
               filterKeywords={filterKeywords}
               setFilterKeywords={setFilterKeywords}
+              filterPractices={filterPractices}
+              setFilterPractices={setFilterPractices}
             />}
             <div className="pb-5">
               <SortDropDown />
