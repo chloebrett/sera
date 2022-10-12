@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
-import Router from 'next/router'
-import { useEffect, useMemo, useRef, useState } from "react";
+import Router, { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import content from '../framework/compiledContent';
 import { Layout } from "../layouts/Layout";
 import Filters from "../components/Filters";
@@ -8,6 +8,7 @@ import Results from "../components/Results";
 import SecondaryFilters from "../components/SecondaryFilters";
 
 const Home: NextPage = () => {
+  const router = useRouter()
   const [showFilters, setShowFilters] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [showSubFilters, setShowSubFilters] = useState(false);
@@ -19,13 +20,26 @@ const Home: NextPage = () => {
   );
   const [filterKeywords, setFilterKeywords] = useState<Set<string>>(new Set());
 
+  
+  useEffect (() => {
+    const { filteredCohorts } = router.query;
+    const cohortFilters = filteredCohorts?.toString().split("&").map((cohort) => decodeURI(decodeURI(cohort)));
+    const set = new Set(cohortFilters);
+    setFilterCohorts(set);
+  }, [router])
+
+  console.log(filterCohorts);
+
+
+
+
   // Add or remove filters to URL query params whenever the filters change
-  useEffect(() => {
-    const query = Array.from(filterCohorts).map((cohort) => encodeURIComponent(cohort)).join("&");
-    Router.push({
-      query: { filteredCohorts: encodeURI(query) },
-  }, undefined, { scroll: false });
-  }, [filterCohorts])
+  // useEffect(() => {
+  //   const query = Array.from(filterCohorts).map((cohort) => encodeURIComponent(cohort)).join("&");
+  //   Router.push({
+  //     query: { filteredCohorts: encodeURI(query) },
+  // }, undefined, { scroll: false });
+  // }, [filterCohorts])
 
   const filteredBestPractices = useMemo(
     () =>
