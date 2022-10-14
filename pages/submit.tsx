@@ -14,6 +14,8 @@ const sha1 = require('sha1');
 import content from '../framework/compiledContent';
 import AutocompleteMultiSelect from '../components/AutocompleteMultiSelect';
 
+const sleep = async (secs: number) => new Promise((resolve) => setTimeout(resolve, secs * 1000));
+
 const displayInput = (
   fieldName: string,
   handleChange: any,
@@ -155,6 +157,10 @@ const SubmitContent = ({}) => {
     const forkOwner = forkCreateResp.data.owner.login;
 
     const content = base64.encode(contentYaml);
+
+    // Hack - wait a few seconds for the repo to be forked.
+    // 5 seconds should do
+    await sleep(5);
 
     // Create the file
     const fileCreateResp = await axios.put(
