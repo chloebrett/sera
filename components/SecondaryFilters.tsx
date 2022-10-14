@@ -99,7 +99,6 @@ const SecondaryFilters = ({
         id={`checkbox-keyword-${practiceIds[index]}`}
       />{" "}
       <label htmlFor={`checkbox-keyword-${practiceIds[index]}`}>{practices[practiceKey]} ({filteredBestPractices.filter((bp) => practiceKey in bp).length})</label>
-      {filteredBestPractices.filter((bp) => console.log(practiceKey, practiceKey in bp))}
     </div>
   ));
 

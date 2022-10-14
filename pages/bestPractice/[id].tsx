@@ -15,7 +15,7 @@ const BestPractice = () => {
   }
 
   return (
-    <Layout title="Persona | Software Engineering User Research Tool" backButtonVisible={true}>
+    <Layout title="SERA | Software Engineering Research Assistant" backButtonVisible={true}>
       <div className="dark:bg-black dark:text-white">
         <div className="flex px-4 mt-10 font-bold row grid place-content-center place-content-center">
           <div className="flex flex-col flex-grow inline text-3xl text-center">

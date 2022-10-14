@@ -1,11 +1,11 @@
-import type { NextPage } from "next";
-import { useEffect, useMemo, useRef, useState } from "react";
+import type { NextPage } from 'next';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import content from '../framework/compiledContent';
-import { Layout } from "../layouts/Layout";
-import Filters from "../components/Filters";
-import Results from "../components/Results";
-import SecondaryFilters from "../components/SecondaryFilters";
-import SortDropDown from "../components/SortDropdown";
+import { Layout } from '../layouts/Layout';
+import Filters from '../components/Filters';
+import Results from '../components/Results';
+import SecondaryFilters from '../components/SecondaryFilters';
+import SortDropDown from '../components/SortDropdown';
 
 const Home: NextPage = () => {
   const [showFilters, setShowFilters] = useState(false);
@@ -34,27 +34,29 @@ const Home: NextPage = () => {
           cohorts.some((cohort) => filterCohorts.has(cohort))
       );
 
-  console.log(filterSubCohorts);
-  console.log(filteredBestPractices.length);
+  useEffect(() => {
+    if (showFilters && filterRef.current) {
+      filterRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [showFilters, filterRef]);
 
-  useEffect(() => {if (showFilters && filterRef.current) {
-      filterRef.current.scrollIntoView({ behavior: "smooth" })
-  }}, [showFilters, filterRef]);
-
-  useEffect(() => {if (showResults && resultsRef.current) {
-      resultsRef.current.scrollIntoView({ behavior: "smooth" })
-  }}, [showResults, resultsRef]);
+  useEffect(() => {
+    if (showResults && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [showResults, resultsRef]);
 
   return (
-    <Layout title="Persona | Software Engineering User Research Tool">
+    <Layout title="SERA | Software Engineering Research Assistant">
       <main className="flex-col flex-1 pb-8">
         <div className="flex flex-col items-center justify-center pb-36 space-y-14 md:space-y-44 min-h-[calc(100vh-56px)]">
-          <h1 className="text-6xl font-bold">Persona</h1>
+          <h1 className="text-6xl font-bold">SERA</h1>
 
           <p className="max-w-3xl text-xl text-center">
-            Persona is a tool to help <b>software engineering researchers</b>{" "}
-            better understand the diverse cohorts they are studying, and to share
-            best practices for conducting research with various user cohorts.
+            SERA (Software Engineering Research Assistant) is a tool to help <b>human-centric software engineering researchers</b>{' '}
+            better understand the diverse cohorts they are studying, and to
+            share best practices for conducting research with various user
+            cohorts.
           </p>
 
           <button onClick={() => setShowFilters(true)}>Get Started</button>
@@ -62,7 +64,10 @@ const Home: NextPage = () => {
         </div>
 
         {showFilters && (
-          <div className="flex flex-col items-center justify-center min-h-screen pt-44 pb-36" ref={filterRef}>
+          <div
+            className="flex flex-col items-center justify-center min-h-screen pt-44 pb-36"
+            ref={filterRef}
+          >
             <Filters
               filteredBestPractices={filteredBestPractices}
               cohorts={content.cohorts}
@@ -78,10 +83,16 @@ const Home: NextPage = () => {
         )}
 
         {showResults && (
-          <div className="flex flex-col items-center justify-center min-h-screen pt-44" ref={resultsRef}>
+          <div
+            className="flex flex-col items-center justify-center min-h-screen pt-44"
+            ref={resultsRef}
+          >
             <p className="pb-5 text-3xl font-bold text-center">Results</p>
-            <button className="pb-5" onClick={() => setShowSubFilters((curr) => !curr)}>
-              {showSubFilters ? "Hide sub filters" : "Show sub filters"}
+            <button
+              className="pb-5"
+              onClick={() => setShowSubFilters((curr) => !curr)}
+            >
+              {showSubFilters ? 'Hide sub filters' : 'Show sub filters'}
             </button>
             {showSubFilters && <SecondaryFilters
               filteredBestPractices={filteredBestPractices}

@@ -14,7 +14,7 @@ export const Layout = ({ title, children, backButtonVisible }: LayoutProps) => {
         <title>{title}</title>
         <meta
           name="description"
-          content="Software engineering user research tool"
+          content="Software Engineering Research Assistant"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

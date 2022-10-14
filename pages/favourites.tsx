@@ -20,7 +20,7 @@ const BestPractice = () => {
   );
 
   return (
-    <Layout title="Persona | Favourites" backButtonVisible={true}>
+    <Layout title="SERA | Favourites" backButtonVisible={true}>
       <div>
         <p className="pb-5 text-3xl font-bold text-center">Your Favourited Best Practices</p>
         <div className="flex justify-center">
