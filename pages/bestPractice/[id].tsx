@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import BestPracticeDisplay from "../../components/BestPracticeDisplay";
 import { Layout } from "../../layouts/Layout";
 
+
 const BestPractice = () => {
   const router = useRouter()
   const { id } = router.query;
@@ -12,8 +13,6 @@ const BestPractice = () => {
   if (bestPractice === undefined) {
     return null;
   }
-
-  const backURL = window.location.origin;
 
   return (
     <Layout title="SERA | Software Engineering Research Assistant" backButtonVisible={true}>

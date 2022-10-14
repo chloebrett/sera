@@ -1,0 +1,43 @@
+paperName: |-
+  The user-centred intelligent environments development process
+  as a guide to co-create smart technology for people with special
+  needs
+paperLink: https://doi.org/10.1007/s10209-016-0514-8
+cohorts:
+  - communication challenges
+keywords:
+  - intelligent environments
+  - |-
+    human-centred
+    design
+  - software development process
+summary: User-centric software development methodology accounting for complex
+  systems and prioritises stakeholder involvement
+bestPractices: >-
+  User-Centred Software Development Process (U-C SPD) methodology
+  aims to assist developers in matching customer expectation and ensuring that
+  privacy, security ethics, inclusion of stakeholders and verification and
+  validation is prioritised.
+
+  U-C SPD involves 3 primary loops that can be adjusted to be more reminiscent of either agile or waterfall models. 
+
+  1.Initial scoping
+
+  2.Main development
+
+  3.Installation 
+
+  This model has been proposed with the development and installation of intelligent environments, however the human-centered approach of integral stakeholder involvement may be appropriate when developing systems for those with specific needs. 
+
+  Positives:
+
+  - Primary and secondary users are able to voice concerns throughout product development
+
+  - increased confidence in product appropriately meeting niche needs
+
+  - Developers reported higher confidence that product will be received well.
+methodology: User-Centred Software Development Process ( U-C SPD)
+publishDate: 2017-01-16T00:00:00.000Z
+submissionDate: 2022-04-15T00:00:00.000Z
+subCohorts: []
+id: 7fa6c307

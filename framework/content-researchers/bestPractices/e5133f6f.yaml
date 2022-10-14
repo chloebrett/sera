@@ -1,0 +1,23 @@
+paperName: "Tai Chi Care: An Exergaming Software using Microsoft Kinect V2 for
+  Blind or Low Vision Person during Confinement"
+paperLink: https://doi.org/10.14569/IJACSA.2020.0110720
+cohorts:
+  - vision impaired
+subCohorts:
+  - blind and vision impaired
+keywords:
+  - blind
+  - gaming
+  - covid-19
+  - sensor
+summary: Uses Microsoft Kinect to guide exercise for BVI people using verbal
+  instructions and corrections
+methodology: The study was observational, and measured body angles during different poses.
+tools: Kinect V2 sensor was used to monitor the skeleton and several bodies at
+  once, but required the participant being properly positioned in-front of the
+  laser.
+notesOfCaution: Be aware that BVI people suffer from imbalance, and may not be
+  particularly flexible.
+publishDate: 2020-01-01T00:00:00.000Z
+submissionDate: 2022-10-07T00:00:00.000Z
+id: e5133f6f

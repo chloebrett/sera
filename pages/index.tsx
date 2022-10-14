@@ -5,28 +5,33 @@ import { Layout } from '../layouts/Layout';
 import Filters from '../components/Filters';
 import Results from '../components/Results';
 import SecondaryFilters from '../components/SecondaryFilters';
+import SortDropDown from '../components/SortDropdown';
 
 const Home: NextPage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [showSubFilters, setShowSubFilters] = useState(false);
   const [filterCohorts, setFilterCohorts] = useState<Set<string>>(new Set());
-  const filterRef = useRef<HTMLDivElement>(null);
-  const resultsRef = useRef<HTMLDivElement>(null);
-  const [filterSubCohorts, setFilterSubCohorts] = useState<Set<string>>(
-    new Set()
-  );
+  const filterRef = useRef<HTMLDivElement>(null)
+  const resultsRef = useRef<HTMLDivElement>(null)
+  const [filterSubCohorts, setFilterSubCohorts] = useState<Set<string>>(new Set());
   const [filterKeywords, setFilterKeywords] = useState<Set<string>>(new Set());
+  const [filterPractices, setFilterPractices] = useState<Set<string>>(new Set());
 
   const filteredBestPractices = useMemo(
     () =>
       content?.bestPractices?.filter(
-        ({ cohorts, subCohorts, keywords }) =>
-          cohorts.some((cohort) => filterCohorts.has(cohort)) ||
-          subCohorts.some((subCohort) => filterSubCohorts.has(subCohort)) ||
-          keywords.some((keyword) => filterKeywords.has(keyword))
+        (bp) =>
+          bp.cohorts.some((cohort) => filterCohorts.has(cohort)) &&
+          ((filterSubCohorts.size == 0 || bp.subCohorts.some((subCohort) => filterSubCohorts.has(subCohort))) &&
+            (filterKeywords.size == 0 || bp.keywords.some((keyword) => filterKeywords.has(keyword))) &&
+            (filterPractices.size == 0 || Array.from(filterPractices).some((practice) => practice in bp)))
       ),
-    [filterCohorts, filterSubCohorts, filterKeywords]
+    [filterCohorts, filterSubCohorts, filterKeywords, filterPractices]
+  );
+  const filteredCohort = content?.bestPractices?.filter(
+    ({ cohorts }) =>
+      cohorts.some((cohort) => filterCohorts.has(cohort))
   );
 
   useEffect(() => {
@@ -54,12 +59,8 @@ const Home: NextPage = () => {
             cohorts.
           </p>
 
-          <button
-            className="px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100"
-            onClick={() => setShowFilters(true)}
-          >
-            Get Started
-          </button>
+          <button className="px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100 dark:border-white dark:text-white dark:hover:text-gray-800" onClick={() => setShowFilters(true)}>Get Started</button>
+
         </div>
 
         {showFilters && (
@@ -88,23 +89,28 @@ const Home: NextPage = () => {
           >
             <p className="pb-5 text-3xl font-bold text-center">Results</p>
             <button
-              className="pb-5"
+              className="mb-5 px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100 dark:border-white dark:text-white dark:hover:text-gray-800"
               onClick={() => setShowSubFilters((curr) => !curr)}
             >
               {showSubFilters ? 'Hide sub filters' : 'Show sub filters'}
             </button>
-            {showSubFilters && (
+            {showSubFilters &&
               <SecondaryFilters
                 filteredBestPractices={filteredBestPractices}
                 filterSubCohorts={filterSubCohorts}
                 setFilterSubCohorts={setFilterSubCohorts}
                 filterKeywords={filterKeywords}
                 setFilterKeywords={setFilterKeywords}
-              />
-            )}
-            <div>
-              <Results filteredBestPractices={filteredBestPractices} />
+                filterPractices={filterPractices}
+                setFilterPractices={setFilterPractices}
+              />}
+            <div className="pb-5">
+              <SortDropDown />
             </div>
+
+            <Results
+              filteredBestPractices={filteredBestPractices}
+            />
           </div>
         )}
       </main>

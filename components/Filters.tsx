@@ -100,18 +100,8 @@ const Filters = ({
         
       </div>
 
-      {/* {subCohortFilters.length > 0 && <div>
-        <h2 className="pb-4 font-bold">Sub-cohorts</h2>
-        <div className="grid grid-cols-3 gap-4">{subCohortFilters}</div>
-      </div>}
-
-      {keywordFilters.length > 0 && <div>
-        <h2 className="pb-4 font-bold">Keywords</h2>
-        <div className="grid grid-cols-3 gap-4">{keywordFilters}</div>
-      </div>} */}
-
       <div className="flex justify-center pt-32">
-      <button className="px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100" onClick={onClick}>Find Best Practices</button>
+      <button className="px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100 dark:border-white dark:text-white dark:hover:text-gray-800" onClick={onClick}>Find Best Practices</button>
       </div>
       
     </div>

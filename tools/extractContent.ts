@@ -60,6 +60,12 @@ const schema = {
   "Related Papers": {
     prop: "relatedPapers",
   },
+  "Publish Date": {
+    prop: "publishDate",
+  },
+  "Submission Date": {
+    prop: "submissionDate",
+  },
 };
 
 const summariseFields = (fieldNames: string[], bestPracticesWithIds: any[]) => {

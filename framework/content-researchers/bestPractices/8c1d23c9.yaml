@@ -1,0 +1,26 @@
+paperName: Review of Quantitative Empirical Evaluations of Technology for People
+  with Visual Impairments
+paperLink: https://dl.acm.org/doi/10.1145/3313831.3376749
+cohorts:
+  - vision impaired
+subCohorts:
+  - blind and vision impaired
+  - low vision
+keywords:
+  - blind
+  - blindfolded
+  - partially sighted
+targetAudience: General advice for reviewing others evaluations
+summary: Advice for reviewing empirical research involving participants with
+  visual impairments
+bestPractices: >-
+  - Be aware and considerate of difficulties researchers face
+  during their evaluation to promote more inclusive practices as opposed to
+  using the same quality metrics for other technologies
+
+  - Small samples sizes may be appropriate for the study, and rejecting papers based on sample size may hinder research in the field
+
+  - Pay attention to how evaluations are reported, especially to the comprehensiveness of the description of the participants
+publishDate: 2020-04-03T00:00:00.000Z
+submissionDate: 2022-10-11T00:00:00.000Z
+id: 8c1d23c9

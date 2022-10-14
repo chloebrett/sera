@@ -1,0 +1,24 @@
+paperName: Development of an algorithm for improving quality and information
+  processing capacity of MathSpeak synthetic speech renderings
+paperLink: https://doi.org/10.1109/VLHCC.2012.6344485
+cohorts:
+  - vision impaired
+subCohorts:
+  - blind
+  - low vision
+keywords:
+  - blind
+  - synthetic speech
+  - college students
+summary: Algorithm for synthetic math speech - MathSpeak
+bestPractices: The paper suggests that disability and non-disability populations
+  can be used due to difficulty in recruiting participants, but only when
+  non-disability group findings can be used to generalise disability group.
+methodology: "Efficacy testing was performed in group sessions, with tasks and
+  observations recorded. This study used two groups: college students with and
+  without visual impairments. Groups completed the same tasks and were measured
+  based on timing, pauses etc. when using different algorithms of MathSpeak."
+tools: MathSpeak which, was evaluated in this study.
+publishDate: 2010-02-26T00:00:00.000Z
+submissionDate: 2022-10-11T00:00:00.000Z
+id: 6219295c
