@@ -24,15 +24,15 @@ const Home: NextPage = () => {
         (bp) =>
           bp.cohorts.some((cohort) => filterCohorts.has(cohort)) &&
           ((filterSubCohorts.size == 0 || bp.subCohorts.some((subCohort) => filterSubCohorts.has(subCohort))) &&
-          (filterKeywords.size == 0 || bp.keywords.some((keyword) => filterKeywords.has(keyword))) &&
-          (filterPractices.size == 0 || Array.from(filterPractices).some((practice) => practice in bp)))
+            (filterKeywords.size == 0 || bp.keywords.some((keyword) => filterKeywords.has(keyword))) &&
+            (filterPractices.size == 0 || Array.from(filterPractices).some((practice) => practice in bp)))
       ),
     [filterCohorts, filterSubCohorts, filterKeywords, filterPractices]
   );
   const filteredCohort = content?.bestPractices?.filter(
-        ({cohorts}) =>
-          cohorts.some((cohort) => filterCohorts.has(cohort))
-      );
+    ({ cohorts }) =>
+      cohorts.some((cohort) => filterCohorts.has(cohort))
+  );
 
   useEffect(() => {
     if (showFilters && filterRef.current) {
@@ -59,7 +59,7 @@ const Home: NextPage = () => {
             cohorts.
           </p>
 
-          <button onClick={() => setShowFilters(true)}>Get Started</button>
+          <button className="px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100 dark:border-white dark:text-white dark:hover:text-gray-800" onClick={() => setShowFilters(true)}>Get Started</button>
 
         </div>
 
@@ -89,20 +89,21 @@ const Home: NextPage = () => {
           >
             <p className="pb-5 text-3xl font-bold text-center">Results</p>
             <button
-              className="pb-5"
+              className="mb-5 px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100 dark:border-white dark:text-white dark:hover:text-gray-800"
               onClick={() => setShowSubFilters((curr) => !curr)}
             >
               {showSubFilters ? 'Hide sub filters' : 'Show sub filters'}
             </button>
-            {showSubFilters && <SecondaryFilters
-              filteredBestPractices={filteredBestPractices}
-              filterSubCohorts={filterSubCohorts}
-              setFilterSubCohorts={setFilterSubCohorts}
-              filterKeywords={filterKeywords}
-              setFilterKeywords={setFilterKeywords}
-              filterPractices={filterPractices}
-              setFilterPractices={setFilterPractices}
-            />}
+            {showSubFilters &&
+              <SecondaryFilters
+                filteredBestPractices={filteredBestPractices}
+                filterSubCohorts={filterSubCohorts}
+                setFilterSubCohorts={setFilterSubCohorts}
+                filterKeywords={filterKeywords}
+                setFilterKeywords={setFilterKeywords}
+                filterPractices={filterPractices}
+                setFilterPractices={setFilterPractices}
+              />}
             <div className="pb-5">
               <SortDropDown />
             </div>

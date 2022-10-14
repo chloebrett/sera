@@ -18,11 +18,11 @@ export const NavBar = ({ backButtonVisible }: NavBarProps) => {
 
     const handleBackClick = () => {
       var referrer = document.referrer;
-      window.open(referrer ? referrer : window.location.origin);
+      window.open(referrer ? referrer : window.location.origin, "_self");
     };
 
     const backButton = 
-      <a className="min-w-fit" onClick={() => handleBackClick()}>
+      <a className="min-w-fit hover:cursor-pointer" onClick={() => handleBackClick()}>
           <ArrowBackIosIcon sx={{ cursor: "pointer" }}></ArrowBackIosIcon>Back
       </a>
 
