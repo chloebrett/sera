@@ -164,7 +164,7 @@ const SubmitContent = ({}) => {
 
     // Create the file
     const fileCreateResp = await axios.put(
-      `${API_BASE}/${forkRepo}/contents/framework/content-user/bestPractices/${contentSha}.yaml`,
+      `${API_BASE}/repos/${forkRepo}/contents/framework/content-user/bestPractices/${contentSha}.yaml`,
       {
         message: 'Add user-generated content',
         committer: {
