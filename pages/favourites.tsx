@@ -20,10 +20,10 @@ const BestPractice = () => {
   );
 
   return (
-    <Layout title="Persona | Favourites" backButtonVisible={true}>
-      <div>
+    <Layout title="SERA | Favourites" backButtonVisible={true}>
+      <div className="flex flex-col items-center justify-center min-h-screen pt-20">
         <p className="pb-5 text-3xl font-bold text-center">Your Favourited Best Practices</p>
-        <div className="flex justify-center">
+        <div className="flex justify-center flex-col">
           {bestPractices.map((bestPractice) => (
             <BestPracticeCard key={bestPractice.id} bestPractice={bestPractice} />
           ))}

@@ -1,0 +1,19 @@
+paperName: "Developer experience: Concept and definition"
+paperLink: https://doi.org/10.1109/ICSSP.2012.6225984
+cohorts:
+  - software engineers
+subCohorts:
+  - software engineers as end users
+keywords:
+  - developer experience
+  - user experience
+targetAudience: software researchers building products for other software engineers
+bestPractices: >-
+  - Developer experience is analogous to user experience, with the
+  key difference being that the user’s goal is to use a product or service,
+  while the developer’s goal is to create a product or service.
+
+  - Developer experience includes a number of facets, with some being technical (for example, the tools used) and others being more human (e.g. the perceived value of one’s own contribution to a team).
+publishDate: 2012-06-02T00:00:00.000Z
+submissionDate: 2022-09-13T00:00:00.000Z
+id: 79303c88

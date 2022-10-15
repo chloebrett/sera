@@ -1,0 +1,40 @@
+paperName: Guidelines for Designing Mobility and Orientation Software for Blind Children
+paperLink: https://doi.org/10.1007/978-3-540-74796-3_35
+cohorts:
+  - vision impaired
+  - children
+subCohorts:
+  - blind
+  - primary school
+  - high school
+keywords:
+  - mobility and orientation
+findings: From the interviews, the children use landmarks to navigate, and found
+  it is important to provide contextual information of surroundings. The most
+  efficient path isn't always used by blind people due to other factors such as
+  paths that require less cognitive demand, or have more landmarks.
+summary: Guidelines for Designing Mobility and Orientation Software for Blind Children
+bestPractices: >-
+  - When teaching routes, landmarks are essential
+
+  - Kids learn and produce higher commitment when their tasks are game-orientated
+
+  - Audio cues can include non-spoken sounds
+
+  - From the interviews in this study, the children use landmarks to navigate, and found it is important to provide contextual information of surroundings
+
+  - The most efficient path isn't always used by blind people due to other factors such as paths that require less cognitive demand, or have more landmarks
+methodology: Open, unstructured interview with recorded audio was used as well
+  as written observations. 5 blind people between 20 and 32 years old, 7 blind
+  children between 8 and 14 years old, M&O specialists, and special education
+  education teachers were also involved. Formative and summative end-user
+  usability evaluations are recommended for navigation design. Methods such as
+  heuristic evaluations, and cognitive walkthroughs are useful to reveal hidden
+  requirements.
+terminology: M&O = mobility and orientation
+notesOfCaution: Be aware of obstacles that blind people cannot detect with their
+  aids such as chandeliers, and beams. Be aware that blind people use temporal
+  information for navigation.
+publishDate: 2007-01-01T00:00:00.000Z
+submissionDate: 2022-09-08T00:00:00.000Z
+id: 96f10387

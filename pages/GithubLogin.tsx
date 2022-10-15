@@ -2,31 +2,44 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import useLocalStorage from "use-local-storage";
-import queryString from "query-string";
 
 const GithubLogin = ({}) => {
   const router = useRouter();
-  console.log(router.query);
 
   const [authData, setAuthData] = useLocalStorage("githubAuth", "");
 
   useEffect(() => {
     const { code } = router.query;
 
+    console.log('code', code);
+
+    if (code === undefined) {
+      return;
+    }
+
     const getAuthData = async () => {
       const { data } = await axios.get(`/api/githubLogin?code=${code}`);
       return data.data;
     };
 
-    getAuthData().then((data) => setAuthData(data));
+    getAuthData().then((data) => {
+      setAuthData(data);
+    });
   }, [router, setAuthData]);
+
+  useEffect(() => {
+    if (authData === "" || (authData as any).error) {
+      return;
+    }
+
+    console.log(authData);
+
+    router.push('/');
+  }, [router, authData]);
 
   return (
     <div>
-      {JSON.stringify(router.query)}
-      {authData === ""
-        ? "authenticating..."
-        : "auth data saved to local storage"}
+      Redirecting...
     </div>
   );
 };

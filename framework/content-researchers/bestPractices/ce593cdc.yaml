@@ -1,0 +1,30 @@
+paperName: Guidelines for Usability Testing with Children
+paperLink: https://doi.org/10.1145/264044.264045
+cohorts:
+  - children
+subCohorts:
+  - primary school
+  - high school
+  - pre-school
+keywords:
+  - usability testing
+  - user-centred design
+  - set-up
+targetAudience: Computer professionals assessing the usability of computer
+  products with children
+findings: Children related to yourself or your colleagues are not ideal
+  usability testing participants
+summary: Avoid testing your own or colleague's children
+notes: A usability testing lab is is a quiet room set up with computer equipment
+  as well as a camera to record interactions, and a one-way mirror to an
+  observation room.
+bestPractices: Children whose parents work for software companies do not
+  necessarily have advanced computer skills, however, they likely have
+  above-average exposure to the products their parents develop. Additionally,
+  children may be put in an awkward position if they have to provide negative
+  feedback.
+methodology: Usability testing, Interview, Observational
+tools: Usability testing Lab.
+publishDate: 1997-09-01T00:00:00.000Z
+submissionDate: 2022-07-19T00:00:00.000Z
+id: ce593cdc

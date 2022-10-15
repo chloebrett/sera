@@ -1,0 +1,35 @@
+paperName: Review of Quantitative Empirical Evaluations of Technology for People
+  with Visual Impairments
+paperLink: https://dl.acm.org/doi/10.1145/3313831.3376749
+cohorts:
+  - vision impaired
+subCohorts:
+  - blind and vision impaired
+  - low vision
+keywords:
+  - blind
+  - blindfolded
+  - partially sighted
+  - evaluation
+targetAudience: General advice for conducting evaluations
+summary: Advice for conducting research involving participants with visual
+  impairments based on a review of the research area
+bestPractices: >-
+  - Visual impairments other than blindness are under-represented
+  so including these users in studies could provide more insight into this
+  diverse population
+
+  - Conducting evaluations in the field could be easier to conduct when it is on the participant's own spaces and schedule
+
+  - Consider single subject design for quantitative evaluations to address issues such as difficulty in recruitment
+
+  - Explore other other fields of research for approaches to working with people with visual impairments
+notesOfCaution: Users tend to want to please the designer, which is more
+  pronounced for people with visual impairments. Beware of this bias.
+relatedPapers: Shari Trewin, Diogo Marques, and Tiago Guerreiro. 2015. Usage of
+  subjective scales in accessibility research. In Proceedings of the 17th
+  International ACM SIGACCESS Conference on Computers & Accessibility. ACM,
+  59–67.
+publishDate: 2020-04-01T00:00:00.000Z
+submissionDate: 2022-10-09T00:00:00.000Z
+id: a174d15b

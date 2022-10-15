@@ -1,5 +1,5 @@
 {
-  "name": "persona",
+  "name": "sera",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@headlessui/react": "^1.7.3",
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.6",
     "axios": "^0.27.2",

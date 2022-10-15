@@ -8,7 +8,7 @@ const Results = ({
   filteredBestPractices
 }: Props) => {
 
-
+  
   const displayedBestPractices = filteredBestPractices?.map(
     (bestPractice: BestPractice) => (
       <BestPracticeCard key={bestPractice.id} bestPractice={bestPractice} />
@@ -16,7 +16,7 @@ const Results = ({
   );
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" id="results">
         {displayedBestPractices}
     </div>
   );

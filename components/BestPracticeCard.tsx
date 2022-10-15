@@ -30,7 +30,7 @@ const BestPracticeCard = ({ bestPractice }: Props) => {
   }
 
   return (
-    <div className="flex max-w-5xl p-5 mb-5 bg-gray-200 rounded-lg dark:bg-gray-900" key={bestPractice.id}>
+    <div className="flex max-w-5xl p-5 mb-5 bg-gray-200 rounded-lg dark:bg-gray-900" key={bestPractice.id} data-publish-date={bestPractice.publishDate} data-submission-date={bestPractice.submissionDate}>
       <div className="pr-2">
         <button onClick={() => toggleFavourited(bestPractice.id)}>
           {isFavourited(bestPractice.id) ? <StarIcon /> : <StarOutlineIcon />}
@@ -39,7 +39,7 @@ const BestPracticeCard = ({ bestPractice }: Props) => {
       <div className="flex flex-col flex-grow">
         <p className="font-bold">{bestPractice.summary ?? bestPractice.paperName}</p>
         <pre className="pt-2 font-sans whitespace-pre-wrap">{bestPractice.bestPractices}</pre>
-        <a href={`/bestPractice/${bestPractice.id}`} target="_blank" rel="noreferrer">
+        <a href={`/bestPractice/${bestPractice.id}`}>
           <p className="pt-2 font-bold text-right cursor-pointer">View More Details</p>
         </a>
       </div>

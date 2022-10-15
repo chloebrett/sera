@@ -1,11 +1,12 @@
-import type { NextPage } from "next";
-import Router, { useRouter } from 'next/router'
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { NextPage } from 'next';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import content from '../framework/compiledContent';
-import { Layout } from "../layouts/Layout";
-import Filters from "../components/Filters";
-import Results from "../components/Results";
-import SecondaryFilters from "../components/SecondaryFilters";
+import { Layout } from '../layouts/Layout';
+import Filters from '../components/Filters';
+import Results from '../components/Results';
+import SecondaryFilters from '../components/SecondaryFilters';
+import SortDropDown from '../components/SortDropdown';
+import { useRouter } from 'next/router'
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -15,10 +16,9 @@ const Home: NextPage = () => {
   const [filterCohorts, setFilterCohorts] = useState<Set<string>>(new Set());
   const filterRef = useRef<HTMLDivElement>(null)
   const resultsRef = useRef<HTMLDivElement>(null)
-  const [filterSubCohorts, setFilterSubCohorts] = useState<Set<string>>(
-    new Set()
-  );
+  const [filterSubCohorts, setFilterSubCohorts] = useState<Set<string>>(new Set());
   const [filterKeywords, setFilterKeywords] = useState<Set<string>>(new Set());
+  const [filterPractices, setFilterPractices] = useState<Set<string>>(new Set());
 
   useEffect (() => {
     const { filteredCohorts } = router.query;
@@ -45,40 +45,53 @@ const Home: NextPage = () => {
   const filteredBestPractices = useMemo(
     () =>
       content?.bestPractices?.filter(
-        ({ cohorts, subCohorts, keywords }) =>
-          cohorts.some((cohort) => filterCohorts.has(cohort)) ||
-          subCohorts.some((subCohort) => filterSubCohorts.has(subCohort)) ||
-          keywords.some((keyword) => filterKeywords.has(keyword))
+        (bp) =>
+          bp.cohorts.some((cohort) => filterCohorts.has(cohort)) &&
+          ((filterSubCohorts.size == 0 || bp.subCohorts.some((subCohort) => filterSubCohorts.has(subCohort))) &&
+            (filterKeywords.size == 0 || bp.keywords.some((keyword) => filterKeywords.has(keyword))) &&
+            (filterPractices.size == 0 || Array.from(filterPractices).some((practice) => practice in bp)))
       ),
-    [filterCohorts, filterSubCohorts, filterKeywords]
+    [filterCohorts, filterSubCohorts, filterKeywords, filterPractices]
+  );
+  const filteredCohort = content?.bestPractices?.filter(
+    ({ cohorts }) =>
+      cohorts.some((cohort) => filterCohorts.has(cohort))
   );
 
-  useEffect(() => {if (showFilters && filterRef.current) {
-    filterRef.current.scrollIntoView({ behavior: "smooth" })
-  }}, [showFilters, filterRef]);
+  useEffect(() => {
+    if (showFilters && filterRef.current) {
+      filterRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [showFilters, filterRef]);
 
-  useEffect(() => {if (showResults && resultsRef.current) {
-    resultsRef.current.scrollIntoView({ behavior: "smooth" })
-  }}, [showResults, resultsRef]);
+  useEffect(() => {
+    if (showResults && resultsRef.current) {
+      resultsRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [showResults, resultsRef]);
 
   return (
-    <Layout title="Persona | Software Engineering User Research Tool">
+    <Layout title="SERA | Software Engineering Research Assistant">
       <main className="flex-col flex-1 pb-8">
-       <div className="flex flex-col items-center justify-center pb-36 space-y-14 md:space-y-44 min-h-[calc(100vh-56px)]">
-        <h1 className="text-6xl font-bold">Persona</h1>
+        <div className="flex flex-col items-center justify-center pb-36 space-y-14 md:space-y-44 min-h-[calc(100vh-56px)]">
+          <h1 className="text-6xl font-bold">SERA</h1>
 
-        <p className="max-w-3xl text-xl text-center">
-          Persona is a tool to help <b>software engineering researchers</b>{" "}
-          better understand the diverse cohorts they are studying, and to share
-          best practices for conducting research with various user cohorts.
-        </p>
+          <p className="max-w-3xl text-xl text-center">
+            SERA (Software Engineering Research Assistant) is a tool to help <b>human-centric software engineering researchers</b>{' '}
+            better understand the diverse cohorts they are studying, and to
+            share best practices for conducting research with various user
+            cohorts.
+          </p>
 
-        <button className="px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100" onClick={() => setShowFilters(true)}>Get Started</button>
+          <button className="px-4 py-2 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100 dark:border-white dark:text-white dark:hover:text-gray-800" onClick={() => setShowFilters(true)}>Get Started</button>
 
         </div>
 
         {showFilters && (
-          <div className="flex flex-col items-center justify-center min-h-screen pt-44 pb-36" ref={filterRef}>
+          <div
+            className="flex flex-col items-center justify-center min-h-screen pt-44 pb-36"
+            ref={filterRef}
+          >
             <Filters
               filteredBestPractices={filteredBestPractices}
               cohorts={content.cohorts}
@@ -94,23 +107,34 @@ const Home: NextPage = () => {
         )}
 
         {showResults && (
-          <div className="flex flex-col items-center justify-center min-h-screen pt-44" ref={resultsRef}>
+          <div
+            className="flex flex-col items-center justify-center min-h-screen pt-44"
+            ref={resultsRef}
+          >
             <p className="pb-5 text-3xl font-bold text-center">Results</p>
-            <button className="pb-5" onClick={() => setShowSubFilters((curr) => !curr)}>
-              {showSubFilters ? "Hide sub filters" : "Show sub filters"}
+            <button
+              className="px-4 py-2 mb-5 font-semibold text-gray-800 border border-gray-800 rounded shadow bg-grey-800 hover:bg-gray-100 dark:border-white dark:text-white dark:hover:text-gray-800"
+              onClick={() => setShowSubFilters((curr) => !curr)}
+            >
+              {showSubFilters ? 'Hide sub filters' : 'Show sub filters'}
             </button>
-            {showSubFilters && <SecondaryFilters 
-              filteredBestPractices={filteredBestPractices}
-              filterSubCohorts={filterSubCohorts}
-              setFilterSubCohorts={setFilterSubCohorts}
-              filterKeywords={filterKeywords}
-              setFilterKeywords={setFilterKeywords}
-            />}
-            <div>
-              <Results
+            {showSubFilters &&
+              <SecondaryFilters
                 filteredBestPractices={filteredBestPractices}
-              />
+                filterSubCohorts={filterSubCohorts}
+                setFilterSubCohorts={setFilterSubCohorts}
+                filterKeywords={filterKeywords}
+                setFilterKeywords={setFilterKeywords}
+                filterPractices={filterPractices}
+                setFilterPractices={setFilterPractices}
+              />}
+            <div className="pb-5">
+              <SortDropDown />
             </div>
+
+            <Results
+              filteredBestPractices={filteredBestPractices}
+            />
           </div>
         )}
       </main>

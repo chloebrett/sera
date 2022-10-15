@@ -15,6 +15,8 @@ export interface BestPractice {
   terminology?: string;
   notesOfCaution?: string;
   relatedPapers?: string;
+  publishDate?: string;
+  submissionDate?: string;
 }
 
 export interface Cohort {
