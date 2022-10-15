@@ -6,7 +6,8 @@ import Filters from '../components/Filters';
 import Results from '../components/Results';
 import SecondaryFilters from '../components/SecondaryFilters';
 import SortDropDown from '../components/SortDropdown';
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
+import {getFiltersFromQueryParam} from '../tools/utils';
 
 const Home: NextPage = () => {
   const router = useRouter()
@@ -21,10 +22,18 @@ const Home: NextPage = () => {
   const [filterPractices, setFilterPractices] = useState<Set<string>>(new Set());
 
   useEffect (() => {
-    const { filteredCohorts } = router.query;
-    const cohortFilters = filteredCohorts?.toString().split("&").map((cohort) => decodeURI(decodeURI(cohort)));
-    const set = new Set(cohortFilters);
-    setFilterCohorts(set);
+    if(!router.isReady) return;
+
+    const { cohortFilters, subCohortsFilters, keywordFilters, practiceFilters } = router.query;
+    const uriCohortFilters = getFiltersFromQueryParam(cohortFilters);
+    const uriSubCohortsFilters = getFiltersFromQueryParam(subCohortsFilters);
+    const uriKeywordFilters = getFiltersFromQueryParam(keywordFilters);
+    const uriPracticeFilters = getFiltersFromQueryParam(practiceFilters);
+
+    setFilterCohorts(uriCohortFilters);
+    setFilterSubCohorts(uriSubCohortsFilters);
+    setFilterKeywords(uriKeywordFilters);
+    setFilterPractices(uriPracticeFilters);
 
     if (cohortFilters && cohortFilters.length > 0) {
       setShowFilters(true);
@@ -32,15 +41,19 @@ const Home: NextPage = () => {
     }
   }, [router])
 
-  console.log(filterCohorts);
-
   // Add or remove filters to URL query params whenever the filters change
-  // useEffect(() => {
-  //   const query = Array.from(filterCohorts).map((cohort) => encodeURIComponent(cohort)).join("&");
-  //   Router.push({
-  //     query: { filteredCohorts: encodeURI(query) },
-  // }, undefined, { scroll: false });
-  // }, [filterCohorts])
+  const updateUriParams = () => {
+    const cohortFilterQuery = Array.from(filterCohorts).map((cohort) => encodeURIComponent(cohort)).join("&");
+    const subCohortFilterQuery = Array.from(filterSubCohorts).map((subCohort) => encodeURIComponent(subCohort)).join("&");
+    const keywordFilterQuery = Array.from(filterKeywords).map((cohort) => encodeURIComponent(cohort)).join("&");
+    Router.push({
+      query: { 
+        cohortFilters: encodeURI(cohortFilterQuery),
+        subCohortsFilters: encodeURI(subCohortFilterQuery),
+        keywordFilters: encodeURI(keywordFilterQuery),
+      },
+    }, undefined, { scroll: false });
+  }
 
   const filteredBestPractices = useMemo(
     () =>
