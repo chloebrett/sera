@@ -6,11 +6,12 @@ import Filters from '../components/Filters';
 import Results from '../components/Results';
 import SecondaryFilters from '../components/SecondaryFilters';
 import SortDropDown from '../components/SortDropdown';
-import Router, { useRouter } from 'next/router'
-import {getFiltersFromQueryParam} from '../tools/utils';
+import Router from 'next/router'
+import queryString from 'query-string';
+import {createQueryParamValue, getFiltersFromQueryParam} from '../tools/utils';
 
 const Home: NextPage = () => {
-  const router = useRouter()
+  const [initialLoad, setInitialLoad] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [showSubFilters, setShowSubFilters] = useState(false);
@@ -21,14 +22,16 @@ const Home: NextPage = () => {
   const [filterKeywords, setFilterKeywords] = useState<Set<string>>(new Set());
   const [filterPractices, setFilterPractices] = useState<Set<string>>(new Set());
 
-  useEffect (() => {
-    if(!router.isReady) return;
-
-    const { cohortFilters, subCohortsFilters, keywordFilters, practiceFilters } = router.query;
-    const uriCohortFilters = getFiltersFromQueryParam(cohortFilters);
-    const uriSubCohortsFilters = getFiltersFromQueryParam(subCohortsFilters);
-    const uriKeywordFilters = getFiltersFromQueryParam(keywordFilters);
-    const uriPracticeFilters = getFiltersFromQueryParam(practiceFilters);
+  // Adds any query params values to the filters
+  useEffect(() => {
+    // I'm not using the next router here because it's a hook and causes some weird dependency issues with 
+    // adding / removing the query params in the use effect below (as it called every time the url is updated). 
+    // This can definitely be done a more elegant way but works for now... 
+    const { cohortFilters, subCohortsFilters, keywordFilters, practiceFilters } = queryString.parse(location.search);
+    const uriCohortFilters = getFiltersFromQueryParam(cohortFilters as string);
+    const uriSubCohortsFilters = getFiltersFromQueryParam(subCohortsFilters as string);
+    const uriKeywordFilters = getFiltersFromQueryParam(keywordFilters as string);
+    const uriPracticeFilters = getFiltersFromQueryParam(practiceFilters as string);
 
     setFilterCohorts(uriCohortFilters);
     setFilterSubCohorts(uriSubCohortsFilters);
@@ -39,21 +42,23 @@ const Home: NextPage = () => {
       setShowFilters(true);
       setShowResults(true);
     }
-  }, [router])
+
+    setInitialLoad(false);
+  }, [])
 
   // Add or remove filters to URL query params whenever the filters change
-  const updateUriParams = () => {
-    const cohortFilterQuery = Array.from(filterCohorts).map((cohort) => encodeURIComponent(cohort)).join("&");
-    const subCohortFilterQuery = Array.from(filterSubCohorts).map((subCohort) => encodeURIComponent(subCohort)).join("&");
-    const keywordFilterQuery = Array.from(filterKeywords).map((cohort) => encodeURIComponent(cohort)).join("&");
+  useEffect(() => {
+    if (initialLoad) return;
+
     Router.push({
       query: { 
-        cohortFilters: encodeURI(cohortFilterQuery),
-        subCohortsFilters: encodeURI(subCohortFilterQuery),
-        keywordFilters: encodeURI(keywordFilterQuery),
+        cohortFilters: createQueryParamValue(filterCohorts),
+        subCohortsFilters: createQueryParamValue(filterSubCohorts),
+        keywordFilters: createQueryParamValue(filterKeywords),
+        practiceFilters: createQueryParamValue(filterPractices),
       },
     }, undefined, { scroll: false });
-  }
+  }, [filterCohorts, filterSubCohorts, filterKeywords, filterPractices, initialLoad]);
 
   const filteredBestPractices = useMemo(
     () =>
@@ -65,10 +70,6 @@ const Home: NextPage = () => {
             (filterPractices.size == 0 || Array.from(filterPractices).some((practice) => practice in bp)))
       ),
     [filterCohorts, filterSubCohorts, filterKeywords, filterPractices]
-  );
-  const filteredCohort = content?.bestPractices?.filter(
-    ({ cohorts }) =>
-      cohorts.some((cohort) => filterCohorts.has(cohort))
   );
 
   useEffect(() => {
@@ -106,14 +107,9 @@ const Home: NextPage = () => {
             ref={filterRef}
           >
             <Filters
-              filteredBestPractices={filteredBestPractices}
               cohorts={content.cohorts}
               filterCohorts={filterCohorts}
               setFilterCohorts={setFilterCohorts}
-              filterSubCohorts={filterSubCohorts}
-              setFilterSubCohorts={setFilterSubCohorts}
-              filterKeywords={filterKeywords}
-              setFilterKeywords={setFilterKeywords}
               onClick={() => setShowResults(true)}
             />
           </div>
