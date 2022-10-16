@@ -1,0 +1,24 @@
+paperName: Some paper I read
+paperLink: ""
+cohorts:
+  - vision impaired
+  - children
+subCohorts:
+  - blind
+  - low vision
+  - primary school
+  - toddlers
+keywords:
+  - sensors
+  - add our own
+targetAudience: ""
+findings: ""
+summary: "- some findings summary stuff"
+notes: ""
+bestPractices: ""
+methodologyUsed: ""
+toolsUsed: ""
+terminology: ""
+notesOfCaution: ""
+relatedPapers: ""
+tools: microsoft word
