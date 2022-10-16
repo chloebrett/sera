@@ -107,7 +107,7 @@ const SubmitContent = ({}) => {
   };
 
   const doSubmit = async (values: any) => {
-    const { data } = await axios.post('/makePullRequest', { values });
+    const { data } = await axios.post('/api/makePullRequest', { values });
 
     console.log(data);
 
