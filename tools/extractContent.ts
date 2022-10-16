@@ -106,6 +106,17 @@ const writeMetadata = async (metadata: any) => {
   await fs.writeFile(path.join(writeFolder, "metadata", `metadata.yaml`), yamlData);
 };
 
+const readUgc: () => Promise<any[]> = async () => {
+  const tPath = path.join(__dirname, '../framework/content-user/bestPractices');
+
+  const filenames = await fs.readdir(tPath);
+  console.log(filenames);
+
+  const data = await Promise.all(filenames.map(async (filename: string) => (await fs.readFile(path.join(tPath, filename))).toString()));
+
+  return data.map(file => yaml.parse(file));
+}
+
 const run = async () => {
   const sheetNames = await readSheetNames(filePath);
 
@@ -135,9 +146,13 @@ const run = async () => {
 
   await writeBestPractices(bestPracticesWithIds);
 
+  const ugcBestPracticesWithIds = await readUgc();
+
+  console.log(ugcBestPracticesWithIds);
+
   const metadata = summariseFields(
     ["cohorts", "subCohorts", "keywords"],
-    bestPracticesWithIds
+    [...bestPracticesWithIds, ...ugcBestPracticesWithIds],
   );
 
   await writeMetadata(metadata);

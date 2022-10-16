@@ -12,14 +12,15 @@ const yaml = require("yaml");
 // import yaml from 'yaml';
 
 const ORIGINAL_CONTENT_FOLDER = path.join(__dirname, "../framework/content-researchers/");
+const UGC_FOLDER = path.join(__dirname, "../framework/content-user/");
 const COMPILED_CONTENT_FOLDER = path.join(
   __dirname,
   "../framework/content-compiled"
 );
 
-function parseYaml(relativePath: string): any {
+function parseYaml(folder: string, relativePath: string): any {
   const input = fs
-    .readFileSync(path.join(ORIGINAL_CONTENT_FOLDER, relativePath))
+    .readFileSync(path.join(folder, relativePath))
     .toString();
 
   return yaml.parse(input);
@@ -40,11 +41,12 @@ function generatePathsList(dirPath: string) {
     }
   }
 
+  console.log('pl', pathsList);
+
   return pathsList;
 }
 
 function withoutExtension(path: string) {
-  console.log(path);
   return path.split("." + extensionOf(path))[0];
 }
 
@@ -60,8 +62,8 @@ function nameFrom(path: string) {
   return path.split("/")[path.split("/").length - 1];
 }
 
-function relativePathOf(path: string) {
-  return path.split(ORIGINAL_CONTENT_FOLDER)[1];
+function relativePathOf(folder: string, path: string) {
+  return path.split(folder)[1];
 }
 
 function firstUpper(str: string) {
@@ -81,31 +83,36 @@ function compile() {
   }
   fs.mkdirSync(COMPILED_CONTENT_FOLDER);
 
-  const paths = generatePathsList(ORIGINAL_CONTENT_FOLDER);
-
-  const relativePaths = paths.map(relativePathOf);
-
   const outputObject: Record<string, any> = {};
 
-  for (const path of relativePaths) {
-    const pathSplit = path.split('/');
-    const folder = pathSplit[0];
-    const filename = withoutExtension(pathSplit[1]);
+  [ORIGINAL_CONTENT_FOLDER, UGC_FOLDER].forEach(folder => {
+    const paths = generatePathsList(folder);
+  
+    const relativePaths = paths.map(path => relativePathOf(folder, path));
 
-    let arr = outputObject[folder];
-
-    if (arr === undefined) {
-        outputObject[folder] = [];
-        arr = outputObject[folder];
+    console.log('rp', relativePaths);
+  
+    for (const path of relativePaths) {
+      console.log(path);
+      const pathSplit = path.split('/');
+      const innerFolder = pathSplit[0];
+      const filename = withoutExtension(pathSplit[1]);
+  
+      let arr = outputObject[innerFolder];
+  
+      if (arr === undefined) {
+          outputObject[innerFolder] = [];
+          arr = outputObject[innerFolder];
+      }
+  
+      const parsed = {
+          ...parseYaml(folder, path),
+          id: filename,
+      };
+  
+      arr.push(parsed);
     }
-
-    const parsed = {
-        ...parseYaml(path),
-        id: filename,
-    };
-
-    arr.push(parsed);
-  }
+  })
 
   fs.writeFileSync(
     path.join(COMPILED_CONTENT_FOLDER, "content.json"),
