@@ -12,6 +12,7 @@ import {createQueryParamValue, getFiltersFromQueryParam} from '../tools/utils';
 
 const Home: NextPage = () => {
   const [initialLoad, setInitialLoad] = useState(true);
+  const predefinedFilters = useRef(false);
   const [showFilters, setShowFilters] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [showSubFilters, setShowSubFilters] = useState(false);
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
     setFilterPractices(uriPracticeFilters);
 
     if (cohortFilters && cohortFilters.length > 0) {
+      predefinedFilters.current = true
       setShowFilters(true);
       setShowResults(true);
     }
@@ -73,20 +75,20 @@ const Home: NextPage = () => {
   );
 
   useEffect(() => {
+    const scrollBehavior = predefinedFilters.current ? 'auto' : 'smooth';
     if (showFilters && filterRef.current) {
-      filterRef.current.scrollIntoView({ behavior: 'smooth' });
+      filterRef.current.scrollIntoView({ behavior: scrollBehavior });
     }
-  }, [showFilters, filterRef]);
 
-  useEffect(() => {
     if (showResults && resultsRef.current) {
-      resultsRef.current.scrollIntoView({ behavior: 'smooth' });
+      resultsRef.current.scrollIntoView({ behavior: scrollBehavior });
+      predefinedFilters.current = false;
     }
-  }, [showResults, resultsRef]);
+  }, [showFilters, filterRef, showResults, resultsRef]);
 
   return (
     <Layout title="SERA | Software Engineering Research Assistant">
-      <main className="flex-col flex-1 pb-8">
+      {!initialLoad && <main className="flex-col flex-1 pb-8">
         <div className="flex flex-col items-center justify-center pb-36 space-y-14 md:space-y-44 min-h-[calc(100vh-56px)]">
           <h1 className="text-6xl font-bold">SERA</h1>
 
@@ -146,7 +148,7 @@ const Home: NextPage = () => {
             />
           </div>
         )}
-      </main>
+      </main>}
     </Layout>
   );
 };
