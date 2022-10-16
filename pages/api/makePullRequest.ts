@@ -12,7 +12,6 @@ export default async function handler(
   response: NextApiResponse
 ) {
   const values = request.body.values as any;
-  const contentYaml = yaml.stringify(values);
 
   console.log(request.body);
 
@@ -28,9 +27,12 @@ export default async function handler(
 
   const { sha: topCommitSha } = shaResp.data.object;
 
-  const contentSha = sha1(contentYaml).substring(0, 8);
+  const contentYamlNoIds = yaml.stringify(values);
+  const contentSha = sha1(contentYamlNoIds).substring(0, 8);
 
   const branchName = `user-submitted-content-${contentSha}`;
+
+  const contentYaml = yaml.stringify({ ...values, id: contentSha });
 
   console.log('sr', shaResp, branchName, contentYaml, contentSha, topCommitSha);
 
