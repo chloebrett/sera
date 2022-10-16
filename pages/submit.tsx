@@ -82,9 +82,6 @@ const displayInput = (
   );
 };
 
-const API_BASE = 'https://api.github.com';
-const REPO_BASE = `${API_BASE}/repos/chloebrett/sera`;
-
 enum AsyncState {
   READY,
   LOADING,
@@ -93,10 +90,6 @@ enum AsyncState {
 }
 
 const SubmitContent = ({}) => {
-  const [authData] = useLocalStorage<{ access_token: string }>('githubAuth', {
-    access_token: '',
-  });
-
   const [asyncState, setAsyncState] = useState<AsyncState>(AsyncState.READY);
 
   const [pullRequestUrl, setPullRequestUrl] = useState<string>('');
@@ -114,90 +107,11 @@ const SubmitContent = ({}) => {
   };
 
   const doSubmit = async (values: any) => {
-    const { access_token } = authData;
+    const { data } = await axios.post('/makePullRequest', { values });
 
-    const authConfig = {
-      headers: {
-        Accept: 'application/vnd.github+json',
-        Authorization: `Bearer ${access_token}`,
-      },
-    };
+    console.log(data);
 
-    // Get the sha ref of the top commit on `main` right now
-    const shaResp = await axios.get(`${REPO_BASE}/git/ref/heads/main`);
-
-    const { sha: topCommitSha } = shaResp.data.object;
-
-    const contentYaml = yaml.stringify(values);
-    const contentSha = sha1(contentYaml).substring(0, 8);
-
-    const branchName = `user-submitted-content-${contentSha}`;
-
-    console.log(
-      'sr',
-      shaResp,
-      branchName,
-      contentYaml,
-      contentSha,
-      topCommitSha
-    );
-
-    // Create a fork of the PR so that we can write a file to it
-    const forkCreateResp = await axios.post(
-      `${REPO_BASE}/forks`,
-      {
-        default_branch_only: true
-      },
-      authConfig
-    );
-
-    console.log('forkcr', forkCreateResp);
-
-    const forkRepo = forkCreateResp.data.full_name;
-    const forkOwner = forkCreateResp.data.owner.login;
-
-    const content = base64.encode(contentYaml);
-
-    // Hack - wait a few seconds for the repo to be forked.
-    // 5 seconds should do
-    await sleep(5);
-
-    // Create the file
-    const fileCreateResp = await axios.put(
-      `${API_BASE}/repos/${forkRepo}/contents/framework/content-user/bestPractices/${contentSha}.yaml`,
-      {
-        message: 'Add user-generated content',
-        committer: {
-          name: 'User Generated Content Submission',
-          email: 'noreply@github.com',
-        },
-        content,
-        branch: 'main',
-      },
-      authConfig
-    );
-
-    console.log('filecr', fileCreateResp);
-
-    // Create the PR
-    const prCreateResp = await axios.post(
-      `${REPO_BASE}/pulls`,
-      {
-        owner: 'chloebrett',
-        repo: 'sera',
-        title: `User submission: ${values.paperName}`,
-        body: 'Automated PR for user-generated content',
-        head: `${forkOwner}:main`,
-        base: 'main',
-      },
-      authConfig
-    );
-
-    console.log('pcr', prCreateResp);
-
-    const { html_url: prUrl } = prCreateResp.data;
-
-    setPullRequestUrl(prUrl);
+    setPullRequestUrl(data.prUrl);
   };
 
   if (asyncState === AsyncState.LOADING) {
