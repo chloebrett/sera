@@ -50,6 +50,8 @@ const displayInput = (
               fieldName as keyof typeof humanReadableFieldNames
             ]
           }
+          freeSolo={true}
+          fullWidth={false}
         />
       </div>
     );
