@@ -1,4 +1,5 @@
 import { BestPractice } from "../shared/sharedTypes";
+import Router from "next/router";
 import styles from "../styles/Results.module.css";
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import DoneIcon from '@mui/icons-material/Done';
@@ -44,9 +45,23 @@ export const humanReadableFieldNames = {
   relatedPapers: "Related papers",
 };
 
+const createFilterUri = (cohorts: string[], field: string, value: string) => {
+  const cohortFilters = cohorts.map((filter) => encodeURIComponent(filter)).join("&");
+
+  switch (field) {
+    case "cohorts":
+      return `?cohortFilters=${encodeURIComponent(value)}`;
+    case "subCohorts":
+      return `?cohortFilters=${encodeURI(cohortFilters)}&subCohortsFilters=${encodeURIComponent(value)}`;
+    case "keywords":
+      return `?cohortFilters=${encodeURI(cohortFilters)}&keywordFilters=${encodeURIComponent(value)}`;
+  }
+}
+
 const displayField = (
   fieldData: string | string[] | undefined,
-  fieldName: string
+  fieldName: string,
+  cohorts: string[]
 ) => {
   if (fieldName === "paperLink") {
     return (
@@ -64,7 +79,7 @@ const displayField = (
   if (fieldData === undefined) {
     return "[none]";
   } else if (Array.isArray(fieldData)) {
-    return fieldData.map((name: string) => <div key={name} className="pr-1 inline"><Chip label={name} /></div>);
+    return fieldData.map((name: string) => <div key={name} className="inline pr-1"><Chip onClick={() => Router.push(`/${createFilterUri(cohorts, fieldName, name)}`)} label={name} /></div>);
   } else {
     return <pre className="font-sans whitespace-pre-wrap">{fieldData}</pre>;
   }
@@ -112,7 +127,7 @@ const BestPracticeDisplay = ({ bestPractice }: Props) => {
           {isFavourited(bestPractice.id) ? <div><StarIcon />Unfavourite</div> : <div><StarOutlineIcon />Favourite</div>}
         </button>
         <a className="pr-3 hover:cursor-pointer" onClick={() => getLink()}>
-          {copyElement.icon}<div className="pl-1 inline">{copyElement.text}</div>
+          {copyElement.icon}<div className="inline pl-1">{copyElement.text}</div>
         </a>
       </div>
       {fieldNames
@@ -135,7 +150,8 @@ const BestPracticeDisplay = ({ bestPractice }: Props) => {
             </h3>
             {displayField(
               bestPractice[fieldName as keyof typeof bestPractice],
-              fieldName
+              fieldName,
+              bestPractice.cohorts
             )}
           </div>
         ))}
