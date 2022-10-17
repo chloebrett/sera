@@ -109,12 +109,17 @@ const writeMetadata = async (metadata: any) => {
 const readUgc: () => Promise<any[]> = async () => {
   const tPath = path.join(__dirname, '../framework/content-user/bestPractices');
 
-  const filenames = await fs.readdir(tPath);
-  console.log(filenames);
-
-  const data = await Promise.all(filenames.map(async (filename: string) => (await fs.readFile(path.join(tPath, filename))).toString()));
-
-  return data.map(file => yaml.parse(file));
+  try {
+    const filenames = await fs.readdir(tPath);
+    console.log(filenames);
+  
+    const data = await Promise.all(filenames.map(async (filename: string) => (await fs.readFile(path.join(tPath, filename))).toString()));
+  
+    return data.map(file => yaml.parse(file));
+  } catch {
+    return []
+  }
+  
 }
 
 const run = async () => {

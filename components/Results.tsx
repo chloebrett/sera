@@ -1,5 +1,6 @@
 import { BestPractice } from "../shared/sharedTypes";
 import BestPracticeCard from "./BestPracticeCard";
+import SearchOffIcon from '@mui/icons-material/SearchOff';
 interface Props {
   filteredBestPractices:  BestPractice[];
 }
@@ -15,9 +16,12 @@ const Results = ({
     )
   );
 
+  const noResults = 
+  <div className="pt-10 text-2xl"><SearchOffIcon></SearchOffIcon> No Results Found</div>
+
   return (
     <div className="flex flex-col" id="results">
-        {displayedBestPractices}
+        {displayedBestPractices.length > 0 ? displayedBestPractices : noResults}
     </div>
   );
 };
