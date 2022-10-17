@@ -86,31 +86,33 @@ function compile() {
   const outputObject: Record<string, any> = {};
 
   [ORIGINAL_CONTENT_FOLDER, UGC_FOLDER].forEach(folder => {
-    const paths = generatePathsList(folder);
+    if (fs.existsSync(folder)) {
+      const paths = generatePathsList(folder);
   
-    const relativePaths = paths.map(path => relativePathOf(folder, path));
-
-    console.log('rp', relativePaths);
+      const relativePaths = paths.map(path => relativePathOf(folder, path));
   
-    for (const path of relativePaths) {
-      console.log(path);
-      const pathSplit = path.split('/');
-      const innerFolder = pathSplit[0];
-      const filename = withoutExtension(pathSplit[1]);
-  
-      let arr = outputObject[innerFolder];
-  
-      if (arr === undefined) {
-          outputObject[innerFolder] = [];
-          arr = outputObject[innerFolder];
+      console.log('rp', relativePaths);
+    
+      for (const path of relativePaths) {
+        console.log(path);
+        const pathSplit = path.split('/');
+        const innerFolder = pathSplit[0];
+        const filename = withoutExtension(pathSplit[1]);
+    
+        let arr = outputObject[innerFolder];
+    
+        if (arr === undefined) {
+            outputObject[innerFolder] = [];
+            arr = outputObject[innerFolder];
+        }
+    
+        const parsed = {
+            ...parseYaml(folder, path),
+            id: filename,
+        };
+    
+        arr.push(parsed);
       }
-  
-      const parsed = {
-          ...parseYaml(folder, path),
-          id: filename,
-      };
-  
-      arr.push(parsed);
     }
   })
 
