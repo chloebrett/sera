@@ -1,0 +1,21 @@
+paperName: Example paper
+paperLink: link to paper
+cohorts:
+  - vision impaired
+  - software engineers
+subCohorts:
+  - blind
+  - low vision
+keywords:
+  - accessibility
+targetAudience: ""
+findings: ""
+summary: Some research about blind software engineers
+notes: ""
+bestPractices: ""
+methodologyUsed: ""
+toolsUsed: ""
+terminology: ""
+notesOfCaution: ""
+relatedPapers: ""
+id: 088dbc85
