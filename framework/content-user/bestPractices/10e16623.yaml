@@ -1,0 +1,59 @@
+paperName: A Curated Personas and Design Guidelines Tool for Better Supporting
+  Diverse End-users
+paperLink: https://doi.org/10.1109/COMPSAC54236.2022.00255
+cohorts:
+  - vision impaired
+  - older adults
+  - HEARING IMPAIRED
+subCohorts: []
+keywords: []
+targetAudience: Software Developers
+findings: >-
+  We wanted to better support software developers to meet
+
+  the accessibility needs of diverse end users. We designed a
+
+  tool to help capture a range of personas representing diverse
+
+  end users, providing developers with support during software
+
+  design to consider a wide range of issues such end users
+
+  may encounter when trying to use their software. Our tool
+
+  provides personas for a range of common end user accessibility challenges, as well as key goals and frustrations such
+
+  users have for e-shopping and e-education platforms, together
+
+  with a curated set of recommended guidelines for addressing
+
+  these issues. During evaluation of our prototype tool our study
+
+  participants agreed that the tool helped them to be more aware
+
+  of a wide range of diverse end-user challenges and to increase
+
+  their empathy so that they could effectively develop more userfriendly software for them.
+summary: |-
+  To address this
+  issue, we designed a curated persona and design guidelines tool
+  to help developers consider and address diverse end-user needs
+  during the software development process. Our tool helps software
+  development teams to take a more holistic view of human nature
+  and diverse end-uses during the software development cycle and
+  to design software with multiple diverse end-user needs in mind.
+  Our evaluation with 23 real world software developers shows
+  that the use of such human-centric persona and guideline tools
+  in the early stages of software development can help to reduce
+  software end-user bias and increase software accessibility.
+notes: ""
+bestPractices: ""
+methodologyUsed: ""
+toolsUsed: ""
+terminology: ""
+notesOfCaution: Student project from academic and industry literature
+relatedPapers: ""
+methodology: Curation of existing personas and guidelines for designing
+  websites/apps for diverse end users
+tools: Figma
+id: "10e16623"
