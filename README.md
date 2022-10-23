@@ -1,3 +1,17 @@
+# Software Engineering Research Assistant (SERA)
+
+SERA (Software Engineering Research Assistant) is a tool developed by a student research team at Monash University to address the challenge of finding best practices, tools, and methodologies conducting human centric software engineering user studies.
+
+https://sera-monash.vercel.app
+
+Credits to these wonderful people (hire them, do it)
+- Lucy Pugh https://www.linkedin.com/in/lucia-pugh-109a9215b/
+- Riley Keane https://www.linkedin.com/in/rileykeane/
+- Irmy van der Spuy https://www.linkedin.com/in/irmy-van-der-spuy-a9a8a2190/
+- Dan Feltham https://www.linkedin.com/in/daniel-feltham/
+
+# Generic NextJS readme incoming
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
